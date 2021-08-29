@@ -4,16 +4,16 @@ import { Task } from './Types'
 
 type Props = {
     tasks: Task[]
-    setTask: React.Dispatch<React.SetStateAction<Task[]>>
+    setTasks: React.Dispatch<React.SetStateAction<Task[]>>
 }
 
 const TaskList: React.FC<Props> = ({ tasks, setTasks }) => {
 
     const handleDone = (task: Task) => {
-        setTasks(prev => prev.map(t => 
+        setTasks(prev => prev.map(t =>
             t.id === task.id
                 ? { ...task, done: !task.done }
-                : t    
+                : t
         ))
     }
 
@@ -23,19 +23,20 @@ const TaskList: React.FC<Props> = ({ tasks, setTasks }) => {
         ))
     }
 
+
     return (
         <div className="inner">
             {
-                tasks.length <= 0 ? '登録されたTODOはありません。':
+                tasks.length <= 0 ? '登録されたTODOはありません。' :
                 <ul className="task-list">
-                    { tasks.map( task => (
-                        <TaskItem 
-                            key={task.id}
-                            task={task}
-                            handleDelete={handleDelete}
-                            handleDone={handleDone}
-                        />
-                    )) }
+                { tasks.map(task => (
+                    <TaskItem
+                        key={task.id}
+                        task={task}
+                        handleDone={handleDone}
+                        handleDelete={handleDelete}
+                    />
+                )) }
                 </ul>
             }
         </div>
